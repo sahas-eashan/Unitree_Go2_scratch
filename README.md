@@ -5,6 +5,7 @@ This project lets you control a Unitree Go2 via TurboWarp (Scratch-like blocks) 
 ## Components
 - `ros2_ws_bridge/scratch_cmdvel_ws.py`: WebSocket server (ws://0.0.0.0:8765) that publishes `/cmd_vel`
 - `turbowarp_project/go2_teleop.sb3`: TurboWarp project that sends JSON messages like `{"vx":0.2,"vy":0,"wz":0.7}`
+- `ros2_cmd_vel_bridge/`: C++ node that bridges `/cmd_vel` into Unitree Sport API requests on the robot
 
 ## Prerequisites
 - Ubuntu 20.04 + ROS 2 Foxy
@@ -44,12 +45,17 @@ source ~/unitree_ros2/setup.sh
 ros2 topic hz /cmd_vel
 ```
 
+## Run (Robot)
+```bash
+source ~/unitree_ros2/cyclonedds_ws/install/setup.bash
+source ~/go2_bringup_ws/install/setup.bash
+ros2 run cmd_vel_unitree_bridge cmd_vel_unitree_bridge_node
+```
+
 ## Robot motion
 
 To actually move the robot, ensure your `/cmd_vel -> Unitree Sport API` bridge is running on the robot.
 
 ## Next Steps
-1. Define richer motion presets in TurboWarp (e.g., 8-direction movement: forward, back, left, right, and diagonals) and map them to `vx`, `vy`, `wz`.
-2. Add CycloneDDS config files under `dds/` and document interface/IP/peers.
-3. Add a shared TurboWarp project link in this README once available.
-4. Add screenshots or a short GIF to `docs/` and reference them here.
+Define richer motion presets in TurboWarp (e.g., 8-direction movement: forward, back, left, right, and diagonals) and map them to `vx`, `vy`, `wz`.
+
