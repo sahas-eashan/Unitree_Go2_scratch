@@ -11,6 +11,13 @@ This project lets you control a Unitree Go2 via TurboWarp (Scratch-like blocks) 
 - Python 3.8
 - `rclpy` available in your environment
 - Network configured to reach robot (if `/cmd_vel` must reach robot over DDS)
+- CycloneDDS communication configured between laptop and robot (interfaces, peers, and `CYCLONEDDS_URI`)
+- Unitree ROS 2 workspace installed (see repo link below)
+
+## Unitree ROS 2 Repo
+```text
+https://github.com/unitreerobotics/unitree_ros2
+```
 
 ## Run (Laptop)
 ### 1) Start the WebSocket -> /cmd_vel bridge
@@ -40,3 +47,9 @@ ros2 topic hz /cmd_vel
 ## Robot motion
 
 To actually move the robot, ensure your `/cmd_vel -> Unitree Sport API` bridge is running on the robot.
+
+## Next Steps
+1. Define richer motion presets in TurboWarp (e.g., 8-direction movement: forward, back, left, right, and diagonals) and map them to `vx`, `vy`, `wz`.
+2. Add CycloneDDS config files under `dds/` and document interface/IP/peers.
+3. Add a shared TurboWarp project link in this README once available.
+4. Add screenshots or a short GIF to `docs/` and reference them here.
